@@ -1,0 +1,23 @@
+<div class="jumbotron">
+  <h1 class="display-4">{{ pageTitle }}</h1>
+</div>
+<div></div>
+<div *ngIf="(post$ | async)?.length==0">No Posts found</div>
+<div class="card-columns">
+<div *ngIf="post$ | async as posts; else errorOccured">
+  <div *ngFor="let post of posts" class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.body }}</p>
+      <comment-detail [id]=post.id></comment-detail>
+    </div>
+  </div>
+</div>
+</div>
+<!-- If unable to retrieve users -->
+<ng-template #errorOccured>
+  <div>
+    {{ errorMessage }}
+  </div>
+</ng-template>
+

@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <h1 class="display-1">{{ pageTitle }}</h1>
+</div>
+<div></div>
+<a [routerLink]="['/user/new']" class="btn btn-primary">Create New User</a>
+  <ul *ngFor="let user of users$ | paginate:{itemsPerPage: 20, currentPage:page ,totalItems: total}" class="list-group">
+    <a [routerLink]="['/users', user.id , page]">
+      <li class="list-group-item">
+        <p>{{ user.name }}</p>
+      </li>
+    </a>
+  </ul>
+  <pagination-controls (pageChange)="handlePageChange($event)" maxSize="10"></pagination-controls>
+<!-- If unable to retrieve users -->
+<ng-template #errorOccured>
+  <div>
+    {{ errorMessage }}
+  </div>
+</ng-template>

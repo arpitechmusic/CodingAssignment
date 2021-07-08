@@ -1,0 +1,32 @@
+<div class="jumbotron">
+  <h1 class="display-4">{{ pageTitle }}</h1>
+</div>
+<!-- User details card -->
+<h4>User Details</h4>
+<div
+  *ngIf="user$ | async as user; else errorOccured"
+  class="card"
+  style="width: 18rem; margin: 0 auto"
+>
+  <div class="card-body">
+    <h5 class="card-title">{{ user.username }}</h5>
+    <p class="card-text"><b>Name:</b> {{ user.name }}</p>
+    <p class="card-text"><b>Email:</b> {{ user.email }}</p>
+    <p class="card-text"><b>Gender:</b> {{ user.gender }}</p>
+    <p class="card-text"><b>Status:</b> {{ user.status }}</p>
+  </div>
+</div>
+<div *ngIf="user$ | async as user; else errorOccured">
+  <app-post-detail [id]=user.id></app-post-detail>
+</div>
+
+<ng-template #errorOccured>
+  <div class="card" style="width: 18rem; margin: 0 auto">
+    <div class="card-body">
+      <h5 class="card-title">{{ errorMessage }}</h5>
+      <p class="card-text">
+        Refresh page to try again
+      </p>
+    </div>
+  </div>
+</ng-template>

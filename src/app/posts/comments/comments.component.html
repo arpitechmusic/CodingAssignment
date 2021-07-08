@@ -1,0 +1,22 @@
+<div>
+  <h6 class="display-4">{{ pageTitle }}</h6>
+</div>
+<div></div>
+<div *ngIf="(comment$ | async)?.length==0">No Comments found</div>
+<div *ngIf="comment$ | async as comments; else errorOccured">
+  <div *ngFor="let comment of comments">
+    <div class="list-group card-body">
+      <h5 class="list-group-item">{{ comment.name }}</h5>
+      <p class="list-group-item">{{ comment.email }}</p>
+      <p class="list-group-item">{{ comment.body }}</p>
+      <p class="card-text"></p>
+    </div>
+  </div>
+</div>
+<!-- If unable to retrieve comments -->
+<ng-template #errorOccured>
+  <div>
+    {{ errorMessage }}
+  </div>
+</ng-template>
+
